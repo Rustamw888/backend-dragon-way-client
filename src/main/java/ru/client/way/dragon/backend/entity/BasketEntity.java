@@ -71,9 +71,10 @@ public class BasketEntity {
     public String toString() {
         return "BasketEntity{" +
                 "id=" + id +
-                ", userId=" + userId +
-                ", dishId=" + dishId +
                 ", quantity=" + quantity +
+                ", dishId=" + dishId +
+                ", orderId=" + orderId +
+                ", userId=" + userId +
                 '}';
     }
 }

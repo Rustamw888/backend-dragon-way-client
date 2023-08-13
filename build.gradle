@@ -44,8 +44,4 @@ dependencies {
     // драйвер БД
     runtimeOnly 'org.postgresql:postgresql'
 
-    // junit5
-    implementation 'org.junit:junit5-engine:5.0.0-ALPHA'
-    testImplementation 'org.springframework.boot:spring-boot-test:1.4.0.RELEASE'
-
 }

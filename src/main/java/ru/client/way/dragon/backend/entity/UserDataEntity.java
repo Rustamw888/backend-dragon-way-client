@@ -65,6 +65,7 @@ public class UserDataEntity {
                 ", phonenumber=" + phonenumber +
                 ", username='" + username + '\'' +
                 ", email='" + email + '\'' +
+                ", roles=" + roles +
                 '}';
     }
 }

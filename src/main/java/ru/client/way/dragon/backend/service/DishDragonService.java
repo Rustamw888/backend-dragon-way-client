@@ -1,9 +1,15 @@
 package ru.client.way.dragon.backend.service;
 
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import ru.client.way.dragon.backend.entity.DishEntity;
 import ru.client.way.dragon.backend.repository.DishDragonRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
+
+import java.util.Date;
+import java.util.List;
 
 @Service
 @Transactional
@@ -17,55 +23,26 @@ public class DishDragonService {
 
     public DishEntity add(DishEntity dish) {
         return repository.save(dish); // метод save обновляет или создает новый объект, если его не было
-        // наверное нужна колонка общей суммы
+        // todo: наверное нужна колонка общей суммы
     }
 
     public void deleteById(Long id) {
         repository.deleteById(id);
     }
 
-//    public List<CategoryEntity> findAll(Long id) {
-//        return repository.findAllByIdOrderByTitleDesc(id);
-//    }
-//
-//    public List<CategoryEntity> findAllSalads(Long id) {
-//        return repository.findAllByIdOrderByTitleDesc(id);
-//    }
-//
-//    public List<CategoryEntity> findAllSnacks(Long id) {
-//        return repository.findAllByIdOrderByTitleDesc(id);
-//    }
-//
-//    public List<CategoryEntity> findAllSoups(Long id) {
-//        return repository.findAllByIdOrderByTitleDesc(id);
-//    }
-//
-//    public List<CategoryEntity> findAllHotDishes(Long id) {
-//        return repository.findAllByIdOrderByTitleDesc(id);
-//    }
-//
-//    public List<CategoryEntity> findAllSideDishes(Long id) {
-//        return repository.findAllByIdOrderByTitleDesc(id);
-//    }
-//
-//    public List<CategoryEntity> findAllDesserts(Long id) {
-//        return repository.findAllByIdOrderByTitleDesc(id);
-//    }
-//
-//    public List<CategoryEntity> findAllDrinks(Long id) {
-//        return repository.findAllByIdOrderByTitleDesc(id);
-//    }
-//
-//    public List<BasketEntity> addAll(Long id, Long sum, String name) {
-//        return repository.addAllByIdOrderByTitleDesc(id, sum, name);
-//    }
-//
-//    public List<BasketEntity> deleteAll(Long id, Long sum) {
-//        return repository.deleteAllByIdOrderByTitleDesc(id, sum);
-//    }
-//
-//    public List<DishEntity> findAllDishes(String name, Long price) {
-//        return repository.findAllDishesByIdOrderByTitleDesc(name, price);
-//    }
+    public DishEntity findById(Long id) {
+        return repository.findById(id).get(); // т.к. возвращается Optional - можно получить объект методом get()
+    }
 
+    @Cacheable(cacheNames = "dishes")
+    public Page<DishEntity> findByParams(String title, Long priceFrom, Long priceTo, Long weightFrom,
+            Long weightTo, Long caloriesFrom, Long caloriesTo, Long categoryId, PageRequest paging) {
+        return repository.findByParams(title, priceFrom, priceTo, weightFrom, weightTo,
+                caloriesFrom, caloriesTo, categoryId, paging);
+    }
+
+    @Cacheable(cacheNames = "dishes")
+    public List<DishEntity> findAll(String email) {
+        return repository.findByUserEmailOrderByTitleAsc(email);
+    }
 }

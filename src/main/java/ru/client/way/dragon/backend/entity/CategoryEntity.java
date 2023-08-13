@@ -39,7 +39,7 @@ public class CategoryEntity {
     @Column(name = "title", nullable = false)
     private String title;
 
-    // todo: думаю здесь должно быть блюдо,каждому блюду одна категория
+    // todo: думаю здесь должно быть блюдо, каждому блюду одна категория
     @OneToOne(fetch = FetchType.LAZY)
     @MapsId
     @JoinColumn(name = "dish_id", referencedColumnName = "id")
@@ -63,6 +63,7 @@ public class CategoryEntity {
         return "CategoryEntity{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
+                ", dish=" + dish +
                 '}';
     }
 }

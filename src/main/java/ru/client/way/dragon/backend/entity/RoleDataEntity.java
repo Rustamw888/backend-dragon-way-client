@@ -63,6 +63,7 @@ public class RoleDataEntity {
         return "RoleDataEntity{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
+                ", users=" + users +
                 '}';
     }
 }

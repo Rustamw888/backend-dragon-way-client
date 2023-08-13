@@ -65,9 +65,9 @@ public class OrderEntity {
     public String toString() {
         return "OrderEntity{" +
                 "id=" + id +
+                ", completed=" + completed +
                 ", basketId=" + basketId +
                 ", userId=" + userId +
-                ", completed=" + completed +
                 '}';
     }
 }
